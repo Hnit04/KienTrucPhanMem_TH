@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ProductService
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://mongo:27017/productdb}
+
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:  "health,info,metrics"
+  endpoint:
+    info:
+      enabled: true
+  info:
+    env:
+      enabled: true

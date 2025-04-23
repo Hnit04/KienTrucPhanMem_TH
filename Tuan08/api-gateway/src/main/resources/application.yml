@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  security:
+    user:
+      name: admin
+      password: 1234
+
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: product-service-route
+          uri: http://product-service:8081
+          predicates:
+            - Path=/api/products/**, /api/categories/**
+          filters:
+            - RemoveRequestHeader=Authorization
+
+        - id: user-service-route
+          uri: http://user-service:8082
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - RemoveRequestHeader=Authorization
+
+        - id: order-service-route
+          uri: http://order-service:8083
+          predicates:
+            - Path=/api/orders/**
+          filters:
+            - RemoveRequestHeader=Authorization
+      discovery:
+        enabled: false  # Tắt discovery (Eureka Client)
+
+eureka:
+  client:
+    enabled: false
+    healthcheck:
+      enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: true

@@ -1,0 +1,44 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: UserService
+
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://mongo:27017/userdb}
+
+  rabbitmq:
+    host: rabbitmq  # Sử dụng tên service trong Docker
+    port: 5672
+    username: guest
+    password: guest
+    connection-timeout: 5000
+    template:
+      retry:
+        enabled: true
+        initial-interval: 2000ms
+        max-attempts: 3
+
+eureka:
+  client:
+    enabled: false
+    register-with-eureka: false
+    fetch-registry: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,info,metrics"
+  endpoint:
+    info:
+      enabled: true
+  info:
+    env:
+      enabled: true
+
+app:
+  security:
+    enabled: false
