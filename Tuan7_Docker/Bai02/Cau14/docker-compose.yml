@@ -1,0 +1,20 @@
+services:
+  web_server:
+    image: nginx:latest
+    container_name: web_server
+    volumes:
+      - ./src/nginx/index.html:/usr/share/nginx/html/index.html
+    networks:
+      - my_private_network
+
+  test_container:
+    image: alpine:latest
+    container_name: test_container
+    command: sh
+    tty: true
+    networks:
+      - my_private_network
+
+networks:
+  my_private_network:
+    driver: bridge

@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: ./react-app
+      dockerfile: Dockerfile
+    container_name: react-nginx
+    restart: always
+    ports:
+      - "3000:80"    # Truy cập http://localhost:3000

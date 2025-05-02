@@ -1,0 +1,14 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';  // Import style mặc định
+import App from './App';  // Import component chính của ứng dụng
+import reportWebVitals from './reportWebVitals';  // Đo hiệu suất ứng dụng
+
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+
+reportWebVitals();
